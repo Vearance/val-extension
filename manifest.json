@@ -1,12 +1,17 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "VCT Live Scores",
     "version": "1.0",
-    "description": "Shows live Valorant scores using VLR.gg unofficial API.",
+    "description": "Shows live Valorant scores using VLR.gg API.",
     "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
         "https://vlrggapi.vercel.app/*"
     ],
-    "browser_action": {
+    "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "48": "icons/logo-48.png",
@@ -14,7 +19,16 @@
         }
     },
     "icons": {
-        "48": "icons/icon.png",
+        "48": "icons/logo-48.png",
         "96": "icons/logo-96.png"
+    },
+    "background": {
+        "service_worker": "background.js",
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_security_policy": {
+        "extension_pages": "default-src 'self'"
     }
 }
