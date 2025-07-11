@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "VCT Live Scores",
+    "version": "1.0",
+    "description": "Shows live Valorant scores using VLR.gg unofficial API.",
+    "permissions": [
+        "https://vlrggapi.vercel.app/*"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "48": "icons/logo-48.png",
+            "96": "icons/logo-96.png"
+        }
+    },
+    "icons": {
+        "48": "icons/icon.png",
+        "96": "icons/logo-96.png"
+    }
+}
