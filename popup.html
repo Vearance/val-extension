@@ -2,22 +2,46 @@
 <html>
 
 <head>
-    <title>VCT Live Scores</title>
+    <meta charset="utf-8" />
+    <title>VCT Status</title>
     <style>
         body {
             font-family: sans-serif;
             padding: 10px;
+            width: 250px;
+        }
+
+        h1 {
+            font-size: 16px;
+            margin: 0 0 8px;
         }
 
         .match {
             margin-bottom: 8px;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .live {
+            color: red;
+            font-weight: bold;
+        }
+
+        .countdown {
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
 
 <body>
-    <h3>Live VCT Matches</h3>
-    <div id="live">Loading...</div>
+    <h1>VCT Matches</h1>
+
+    <div id="liveSection"></div>
+    <hr>
+    <div id="upcomingSection"></div>
+
     <script src="popup.js"></script>
 </body>
 
