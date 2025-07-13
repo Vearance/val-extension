@@ -1,90 +1,84 @@
-// change minutes to hour-minute format
 function formatCountdown(minutes) {
     const hrs = Math.floor(minutes / 60);
     const min = Math.floor(minutes % 60);
     return `${hrs}h ${min}m`;
 }
 
-// pop-up design for live matches
-function renderLive(matches) {
-    const liveSection = document.getElementById("liveSection");
-    liveSection.innerHTML = "<h2>🔴 Live Matches</h2>";
-
-    if (!matches || matches.length === 0) {
-        liveSection.innerHTML += "<p>No live matches.</p>";
-        return;
-    }
-
-    matches.forEach(match => {
-        const div = document.createElement("div");
-        div.className = "match live";
-
-        // Parse helper
-        const parseScore = (val) => val === "N/A" ? 0 : parseInt(val);
-
-        const t1_ct = parseScore(match.team1_round_ct);
-        const t1_t  = parseScore(match.team1_round_t);
-        const t2_ct = parseScore(match.team2_round_ct);
-        const t2_t  = parseScore(match.team2_round_t);
-
-        const round_t1 = t1_ct + t1_t;
-        const round_t2 = t2_ct + t2_t;
-
-        // HTML
-        div.innerHTML = `
-            <div class="team-row">
-                <img src="${match.team1_logo}" alt="${match.team1}" class="team-logo">
-                <span class="team-name">${match.team1}</span>
-                <span class="match-score">${match.score1}</span>
-            </div>
-
-            <div class="round-score">
-                <span> ${round_t1} — ${round_t2} </span>
-            </div>
-
-            <div class="team-row">
-                <img src="${match.team2_logo}" alt="${match.team2}" class="team-logo">
-                <span class="team-name">${match.team2}</span>
-                <span class="match-score">${match.score2}</span>
-            </div>
-
-            <div class="map-info">
-                Map ${match.map_number}: <strong>${match.current_map}</strong>
-            </div>
-            <div class="series-info">
-                ${match.match_event} — ${match.match_series}
-            </div>
-            <a href="${match.match_page}" target="_blank" class="match-link">🔗 Open Match</a>
-        `;
-
-        liveSection.appendChild(div);
-    });
+function sum(val1, val2) {
+    return (val1 === "N/A" ? 0 : parseInt(val1)) + (val2 === "N/A" ? 0 : parseInt(val2));
 }
 
-
-// pop-up design for upcoming matches
-function renderUpcoming(match, minutes) {
-    const upcomingSection = document.getElementById("upcomingSection");
-    upcomingSection.innerHTML = "<h2>Next Match</h2>";
+function renderLive(match) {
+    const section = document.getElementById("liveMatchSection");
 
     if (!match) {
-        upcomingSection.innerHTML += "<p>No upcoming match found.</p>";
+        section.innerHTML = `<p>No live match currently.</p>`;
         return;
     }
 
-    const div = document.createElement("div");
-    div.className = "match";
-    div.innerHTML = `
-        ${match.team1} vs ${match.team2}<br>
-        Starts in: <span class="countdown">${formatCountdown(minutes)}</span>
+    const round1 = sum(match.team1_round_ct, match.team1_round_t);
+    const round2 = sum(match.team2_round_ct, match.team2_round_t);
+
+    section.innerHTML = `
+        <div class="live-match-header">
+            <div class="match-info">
+                <h2>Live Match</h2>
+                <p>${match.match_event}</p>
+                <p>${match.match_series}</p>
+            </div>
+            <a class="open-link" href="${match.match_page}" target="_blank">Open</a>
+        </div>
+
+        <div class="match-details">
+            <div class="team-column">
+                <div class="team-card">
+                    <div class="team-logo-placeholder">
+                        <img src="${match.team1_logo}" width="50" height="50" />
+                    </div>
+                    <span class="team-name">${match.team1}</span>
+                </div>
+                <div class="series-score-value">${match.score1}</div>
+            </div>
+
+            <div class="map-score-info">
+                <p class="score">${round1} : ${round2}</p>
+                <p class="map">Map ${match.map_number}: ${match.current_map}</p>
+            </div>
+
+            <div class="team-column">
+                <div class="team-card">
+                    <div class="team-logo-placeholder">
+                        <img src="${match.team2_logo}" width="50" height="50" />
+                    </div>
+                    <span class="team-name">${match.team2}</span>
+                </div>
+                <div class="series-score-value">${match.score2}</div>
+            </div>
+        </div>
     `;
-    upcomingSection.appendChild(div);
+}
+
+function renderUpcoming(match, minutes) {
+    const section = document.getElementById("nextMatchSection");
+
+    if (!match) {
+        section.innerHTML = `<p>No upcoming match found.</p>`;
+        return;
+    }
+
+    section.innerHTML = `
+        <div class="next-match-info">
+            <h3>Next Match</h3>
+            <p>${match.team1} vs ${match.team2}</p>
+        </div>
+        <div class="next-match-time">${formatCountdown(minutes)}</div>
+    `;
 }
 
 function loadData() {
-    chrome.storage.local.get(["liveMatches", "nextMatch", "nextMatchInMin"], (result) => {
-        renderLive(result.liveMatches || []);
-        renderUpcoming(result.nextMatch, result.nextMatchInMin);
+    chrome.storage.local.get(["liveMatches", "nextMatch", "nextMatchInMin"], ({ liveMatches, nextMatch, nextMatchInMin }) => {
+        renderLive(liveMatches?.[0]);
+        renderUpcoming(nextMatch, nextMatchInMin);
     });
 }
 

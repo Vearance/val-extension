@@ -1,5 +1,5 @@
 const UPCOMING_API = 'https://vlrggapi.vercel.app/match?q=upcoming';
-const LIVE_API = 'https://vlrggapi.vercel.app/match?q=live_score&num_pages=1&max_retries=3&request_delay=1&timeout=30';
+const LIVE_API = 'https://vlrggapi.vercel.app/match?q=live_score';
 
 // entry/start up
 // checkUpcomingMatches();
@@ -86,7 +86,7 @@ async function checkUpcomingMatches() {
 
 function startLivePolling() {
     chrome.alarms.clearAll();
-    chrome.alarms.create("checkLive", { periodInMinutes: 0.5 }); // every 30s
+    chrome.alarms.create("checkLive", { periodInMinutes: 1 }); // every 60s
     checkLiveMatches(); // call immediately too
 }
 
