@@ -8,6 +8,10 @@ function shortenName(name) {
     return name.length > 16 ? name.slice(0, 16).trim() + '…' : name;
 }
 
+function shortenNextName(name) {
+    return name.length > 25 ? name.slice(0, 16).trim() + '…' : name;
+}
+
 function sum(val1, val2) {
     return (val1 === "N/A" ? 0 : parseInt(val1)) + (val2 === "N/A" ? 0 : parseInt(val2));
 }
@@ -83,7 +87,10 @@ function renderUpcoming(match, minutes) {
     section.innerHTML = `
         <div class="next-match-info">
             <h3>Next Match</h3>
-            <p>${match.team1} vs ${match.team2}</p>
+            <p>
+            <span title="${match.team1}">${shortenNextName(match.team1)}</span> vs 
+            <span title="${match.team2}">${shortenNextName(match.team2)}</span>
+            </p>
         </div>
         <div class="next-match-time">${formatCountdown(minutes)}</div>
     `;
