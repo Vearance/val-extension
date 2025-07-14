@@ -108,7 +108,8 @@ async function checkLiveMatches() {
         // show badge
         const liveCount = matches.length;
         chrome.action.setBadgeText({ text: liveCount > 0 ? String(liveCount) : "" });
-        chrome.action.setBadgeBackgroundColor({ color: "#FF4136" });
+        chrome.action.setBadgeBackgroundColor({ color: "#434343" });
+        chrome.action.setBadgeTextColor?.({ color: "#FFFFFF" });
 
         if (liveCount === 0) {
             console.log("No live matches. Back to upcoming matches.");
