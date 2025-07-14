@@ -47,9 +47,19 @@ body {
     stroke: #f0f0f0;
 }
 
+.no-match-msg {
+    font-style: italic;
+    font-size: 14px;
+    /* padding: 12px 0; */
+    text-align: center;
+    color: #D2D2D2;
+}
+
 /* Live Match Section */
 .live-match-section {
     padding-top: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .live-match-header {
@@ -109,23 +119,25 @@ body {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
+    justify-content: center;
+    /* gap: 12px; */
 }
 
 .team-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px; /* Jarak antara kartu tim dan skor seri */
+    gap: 12px; /* Jarak antara kartu tim dan skor seri */
     flex-shrink: 0; /* Mencegah kolom menyusut */
 }
 
 .team-card {
-    background-color: #3a3a3c; /* Warna kartu tim */
+    background-color: #434343;
     border-radius: 8px;
-    padding: 15px 5px; /* Sedikit penyesuaian padding */
-    width: 110px; /* Sedikit mengurangi lebar agar pas */
-    height: 130px; /* Sedikit mengurangi tinggi */
+    padding: 12px 4px; /* Sedikit penyesuaian padding */
+    width: 100px; /* Sedikit mengurangi lebar agar pas */
+    height: 115px; /* Sedikit mengurangi tinggi */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,14 +153,19 @@ body {
     justify-content: center;
 }
 
-.team-logo-placeholder svg {
+/* .team-logo-placeholder svg {
     width: 100%;
     height: 100%;
-}
+} */
 
 .team-name {
     font-weight: bold;
     font-size: 14px;
+    text-align: center;
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .map-score-info {
@@ -158,8 +175,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* This raises the content */
-
-    margin-top: -12px; /*  move upward manually */
+    margin-top: -10px; /*  move upward manually */
 }
 
 .map-score-info .score {
@@ -213,7 +229,7 @@ body {
     margin-top: -8px;
     background-color: #434343;
     border-radius: 6px;
-    width: 40px;
+    width: 30px;
     height: 30px;
     display: flex;
     justify-content: center;
@@ -234,6 +250,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-left: 10px;
+    padding-right: 6px;
 }
 
 .next-match-info h3 {
@@ -254,7 +272,7 @@ body {
 
 .next-match-time {
     padding-top: 23px;
-    padding-right: 6px;
+    /* padding-right: 2px; */
     color: #D2D2D2;
     text-align: right;
     font-size: 10px;

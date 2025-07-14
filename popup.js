@@ -4,6 +4,10 @@ function formatCountdown(minutes) {
     return `${hrs}h ${min}m`;
 }
 
+function shortenName(name) {
+    return name.length > 16 ? name.slice(0, 16).trim() + '…' : name;
+}
+
 function sum(val1, val2) {
     return (val1 === "N/A" ? 0 : parseInt(val1)) + (val2 === "N/A" ? 0 : parseInt(val2));
 }
@@ -12,7 +16,7 @@ function renderLive(match) {
     const section = document.getElementById("liveMatchSection");
 
     if (!match) {
-        section.innerHTML = `<p>No live match currently.</p>`;
+        section.innerHTML = `<p class="no-match-msg">No live match currently.</p>`;
         return;
     }
 
@@ -41,7 +45,7 @@ function renderLive(match) {
                     <div class="team-logo-placeholder">
                         <img src="${logo1}" width="50" height="50" />
                     </div>
-                    <span class="team-name">${match.team1}</span>
+                    <span class="team-name" title="${match.team1}">${shortenName(match.team1)}</span>
                 </div>
                 <div class="series-score-value">${match.score1}</div>
             </div>
@@ -60,7 +64,7 @@ function renderLive(match) {
                     <div class="team-logo-placeholder">
                         <img src="${logo2}" width="50" height="50" />
                     </div>
-                    <span class="team-name">${match.team2}</span>
+                    <span class="team-name" title="${match.team2}">${shortenName(match.team2)}</span>
                 </div>
                 <div class="series-score-value">${match.score2}</div>
             </div>
