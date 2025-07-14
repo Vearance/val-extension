@@ -15,13 +15,13 @@
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "48": "icons/logo-48.png",
-            "96": "icons/logo-96.png"
+            "48": "images/icon.png",
+            "96": "images/icon.png"
         }
     },
     "icons": {
-        "48": "icons/logo-48.png",
-        "96": "icons/logo-96.png"
+        "48": "images/icon.png",
+        "96": "images/icon.png"
     },
     "background": {
         "service_worker": "background.js",
