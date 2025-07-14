@@ -19,6 +19,12 @@ function renderLive(match) {
     const round1 = sum(match.team1_round_ct, match.team1_round_t);
     const round2 = sum(match.team2_round_ct, match.team2_round_t);
 
+    // use fallback logo if broken image is found
+    const fallbackLogo = "images/valorant.png";
+
+    const logo1 = match.team1_logo.includes("/img/vlr/tmp/vlr.png") ? fallbackLogo : match.team1_logo;
+    const logo2 = match.team2_logo.includes("/img/vlr/tmp/vlr.png") ? fallbackLogo : match.team2_logo;
+
     section.innerHTML = `
         <div class="live-match-header">
             <div class="match-info">
@@ -33,7 +39,7 @@ function renderLive(match) {
             <div class="team-column">
                 <div class="team-card">
                     <div class="team-logo-placeholder">
-                        <img src="${match.team1_logo}" width="50" height="50" />
+                        <img src="${logo1}" width="50" height="50" />
                     </div>
                     <span class="team-name">${match.team1}</span>
                 </div>
@@ -52,7 +58,7 @@ function renderLive(match) {
             <div class="team-column">
                 <div class="team-card">
                     <div class="team-logo-placeholder">
-                        <img src="${match.team2_logo}" width="50" height="50" />
+                        <img src="${logo2}" width="50" height="50" />
                     </div>
                     <span class="team-name">${match.team2}</span>
                 </div>
