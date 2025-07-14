@@ -23,8 +23,8 @@ function renderLive(match) {
         <div class="live-match-header">
             <div class="match-info">
                 <h2>Live Match</h2>
-                <p>${match.match_event}</p>
-                <p>${match.match_series}</p>
+                <p class="match-event">${match.match_event}</p>
+                <p class="match-series">${match.match_series}</p>
             </div>
             <a class="open-link" href="${match.match_page}" target="_blank">Open</a>
         </div>
@@ -41,7 +41,11 @@ function renderLive(match) {
             </div>
 
             <div class="map-score-info">
-                <p class="score">${round1} : ${round2}</p>
+                <p class="score">
+                    <span class="score-left">${round1}</span>
+                    <span class="score-separator">:</span>
+                    <span class="score-right">${round2}</span>
+                </p>
                 <p class="map">Map ${match.map_number}: ${match.current_map}</p>
             </div>
 

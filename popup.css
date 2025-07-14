@@ -1,7 +1,7 @@
 /* General Styling */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #fd2626; /* Latar belakang gelap untuk halaman */
+    background-color: #282828; /* Latar belakang gelap untuk halaman */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@ body {
 
 /* Main Scoreboard Container */
 .scoreboard-container {
-    background-color: #2c2c2e; /* Warna latar belakang utama container */
+    background-color: #282828; /* Warna latar belakang utama container */
     border-radius: 12px;
     width: 375px;
     max-width: 100%;
@@ -26,8 +26,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #444; /* Garis pemisah di bawah header */
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(161, 161, 161, 0.70); /* Garis pemisah di bawah header */
 }
 
 .scoreboard-header .title {
@@ -42,10 +42,18 @@ body {
 }
 
 .scoreboard-header .icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     stroke: #f0f0f0;
 }
+
+/* .no-match-msg {
+    font-style: italic;
+    font-size: 14px;
+    padding: 12px 0;
+    text-align: center;
+    color: #D2D2D2;
+} */
 
 /* Live Match Section */
 .live-match-section {
@@ -60,29 +68,53 @@ body {
 }
 
 .live-match-header .match-info h2 {
-    font-size: 22px;
-    font-weight: bold;
     margin: 0 0 4px 0;
+    color: #F6F6F6;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
-.live-match-header .match-info p {
-    font-size: 14px;
-    color: #a0a0a0;
+.live-match-header .match-info .match-event {
     margin: 0;
+    color: #DCDCDC;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.live-match-header .match-info .match-series {
+    margin: 0;
+    color: #D2D2D2;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .live-match-header .open-link {
-    font-size: 14px;
-    color: #a0a0a0;
     text-decoration: underline;
     cursor: pointer;
-    padding-top: 4px; /* Penyesuaian agar sejajar */
+    padding-top: 28px;
+    color: #DCDCDC;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
 }
 
-/* PERBAIKAN UTAMA: Match Details (Teams and Score) */
 .match-details {
     display: flex;
-    justify-content: space-between; /* Menggunakan space-between lagi */
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding-bottom: 16px;
@@ -129,21 +161,63 @@ body {
 
 .map-score-info {
     text-align: center;
-    flex-grow: 1; /* Membiarkan elemen ini mengisi ruang yang tersedia */
-    padding: 0 5px; /* Menambah sedikit padding horizontal */
+    flex-grow: 1;
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* This raises the content */
+
+    margin-top: -12px; /*  move upward manually */
 }
 
 .map-score-info .score {
-    font-size: 24px; /* Sedikit menyesuaikan ukuran font */
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px; /* spacing between numbers and ':' */
     margin: 0;
-    white-space: nowrap;
 }
 
+.map-score-info .score-left {
+    color: #F6F6F6;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: right;
+}
+
+.map-score-info .score-separator {
+    color: #F6F6F6;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.map-score-info .score-right {
+    color: #F6F6F6;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: left;
+}
+
+
+
+
 .map-score-info .map {
-    font-size: 12px; /* Sedikit menyesuaikan ukuran font */
-    color: #a0a0a0;
+    font-size: 12px;
+    color: #F6F6F6;
     margin-top: 4px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .series-score-value {
@@ -160,7 +234,7 @@ body {
 
 /* Next Match Section */
 .next-match-section {
-    border-top: 1px solid #444; /* Garis pemisah di atas */
+    border-top: 1px solid rgba(161, 161, 161, 0.70); /* Garis pemisah di atas */
     padding-top: 16px;
     display: flex;
     justify-content: space-between;
@@ -168,19 +242,28 @@ body {
 }
 
 .next-match-info h3 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     margin: 0 0 4px 0;
+    color: #F6F6F6;
 }
 
 .next-match-info p {
-    font-size: 14px;
-    color: #a0a0a0;
+    font-size: 12px;
     margin: 0;
+    color: #DCDCDC;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .next-match-time {
-    font-size: 14px;
-    font-style: italic; /* Gaya miring untuk waktu */
-    color: #a0a0a0;
+    padding-top: 23px;
+    padding-right: 6px;
+    color: #D2D2D2;
+    text-align: right;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
 }
