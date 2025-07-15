@@ -80,7 +80,7 @@ function renderUpcoming(match, minutes) {
     const section = document.getElementById("nextMatchSection");
 
     if (!match) {
-        section.innerHTML = `<p>No upcoming match found.</p>`;
+        section.innerHTML = `<p class="no-match-msg">No upcoming match found.</p>`;
         return;
     }
 

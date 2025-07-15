@@ -26,8 +26,11 @@ chrome.runtime.onInstalled.addListener(() => {
 
 function setCooldown(minutes) {
     console.log(`Setting next check in ${minutes} minutes`);
-    chrome.alarms.clearAll();
-    chrome.alarms.create("checkUpcoming", { delayInMinutes: minutes });
+    chrome.alarms.clear("checkUpcoming", () => {
+        chrome.alarms.create("checkUpcoming", {
+            delayInMinutes: minutes
+        });
+    });
 }
 
 
@@ -74,6 +77,7 @@ async function checkUpcomingMatches() {
                     startLivePolling();
                 }
             });
+            // setCooldown(15);
         }
 
     } catch (err) {
