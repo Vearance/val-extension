@@ -18,18 +18,47 @@
                 <img src="images/icon.png" width="20" height="20" />
                 VCT Live Scores
             </div>
-            <img src="images/setting-light.png" width="18" height="18" alt="Settings Icon" class="icon" />
+            <img src="images/setting-light.png" alt="Settings" class="icon settings-icon" id="settingsToggle" width="18" height="18" />
         </header>
 
-        <!-- Live Match -->
-        <section class="live-match-section" id="liveMatchSection">
-            <!-- Dynamic content will be injected by popup.js -->
-        </section>
+        <!-- MAIN VIEW -->
+        <div id="mainView">
+            <!-- Live Match -->
+            <section class="live-match-section" id="liveMatchSection">
+                <!-- Dynamic content will be injected by popup.js -->
+            </section>
 
-        <!-- Next Match -->
-        <section class="next-match-section" id="nextMatchSection">
-            <!-- Dynamic content will be injected by popup.js -->
-        </section>
+            <!-- Next Match -->
+            <section class="next-match-section" id="nextMatchSection">
+                <!-- Dynamic content will be injected by popup.js -->
+            </section>
+        </div>
+
+
+        <!-- SETTINGS VIEW -->
+        <div id="settingsView" class="hidden">
+            <!-- Settings Panel -->
+            <div class="settings-panel">
+                <label class="toggle-row">
+                    Show Live Match Badge
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="badgeToggle" />
+                        <span class="slider"></span>
+                    </div>
+                </label>
+
+                <label class="toggle-row">
+                    Enable Dark Mode
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle" />
+                        <span class="slider"></span>
+                    </div>
+                </label>
+
+                <a href="about.html" target="_blank">About</a>
+            </div>
+        </div>
+
     </div>
 
     <script src="popup.js"></script>

@@ -10,8 +10,21 @@ body {
     color: #f0f0f0;
 }
 
+#mainView,
+#settingsView {
+    transition: opacity 0.3s ease;
+}
+
+#mainView.hidden,
+#settingsView.hidden {
+    display: none;
+    opacity: 0;
+}
+
+
 /* Main Scoreboard Container */
 .scoreboard-container {
+    position: relative;
     background-color: #282828;
     border-radius: 12px;
     width: 375px;
@@ -27,7 +40,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 8px;
-    border-bottom: 1px solid rgba(161, 161, 161, 0.70); /* Garis pemisah di bawah header */
+    border-bottom: 1px solid rgba(161, 161, 161, 0.70);
+    /* Garis pemisah di bawah header */
 }
 
 .scoreboard-header .title {
@@ -53,6 +67,101 @@ body {
     /* padding: 12px 0; */
     text-align: center;
     color: #D2D2D2;
+}
+
+/* Settings Panel */
+.settings-panel {
+    border-top: 1px solid #444;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    color: #dcdcdc;
+}
+
+.settings-panel.hidden {
+    display: none;
+}
+
+/* Toggle UI */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 18px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #666;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggle-switch input:checked+.slider {
+    background-color: #0aadff;
+}
+
+.toggle-switch input:checked+.slider:before {
+    transform: translateX(16px);
+}
+
+/* Rotate animation */
+.settings-icon.rotate {
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.settings-icon.close {
+    transform: rotate(90deg);
+}
+
+.settings-icon {
+    cursor: pointer;
+}
+
+/* Light mode (optional support) */
+body.light-mode {
+    background-color: #f6f6f6;
+    color: #111;
+}
+
+body.light-mode .scoreboard-container {
+    background: #fff;
+}
+
+body.light-mode .settings-panel {
+    border-color: #ccc;
 }
 
 /* Live Match Section */
@@ -128,7 +237,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px; /* gap between team cards and series score */
+    gap: 12px;
+    /* gap between team cards and series score */
     flex-shrink: 0;
 }
 
@@ -136,7 +246,7 @@ body {
     background-color: #434343;
     border-radius: 8px;
     padding: 12px 4px;
-    width: 100px; 
+    width: 100px;
     height: 115px;
     display: flex;
     flex-direction: column;
@@ -175,14 +285,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: -10px; /* move upward manually */
+    margin-top: -10px;
+    /* move upward manually */
 }
 
 .map-score-info .score {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px; /* spacing between numbers and ':' */
+    gap: 4px;
+    /* spacing between numbers and ':' */
     margin: 0;
 }
 
@@ -245,7 +357,8 @@ body {
 
 /* Next Match Section */
 .next-match-section {
-    border-top: 1px solid rgba(161, 161, 161, 0.70); /* Garis pemisah di atas */
+    border-top: 1px solid rgba(161, 161, 161, 0.70);
+    /* Garis pemisah di atas */
     padding-top: 16px;
     display: flex;
     justify-content: space-between;

@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "VCT Live Scores",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Shows live Valorant scores using VLR.gg API.",
     "permissions": [
         "storage",
@@ -30,10 +30,5 @@
     },
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://vlrggapi.vercel.app"
-    },
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "vct-livescore@addons"
-        }
     }
 }

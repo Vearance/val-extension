@@ -16,6 +16,27 @@ function sum(val1, val2) {
     return (val1 === "N/A" ? 0 : parseInt(val1)) + (val2 === "N/A" ? 0 : parseInt(val2));
 }
 
+const toggleBtn = document.getElementById("settingsToggle");
+const mainView = document.getElementById("mainView");
+const settingsView = document.getElementById("settingsView");
+
+let settingsOpen = false;
+
+toggleBtn.addEventListener("click", () => {
+    settingsOpen = !settingsOpen;
+
+    // toggle rotate icon
+    toggleBtn.classList.toggle("rotate", settingsOpen);
+    toggleBtn.classList.toggle("close", settingsOpen);
+
+    // change icon src
+    toggleBtn.src = settingsOpen ? "images/close-light.png" : "images/setting-light.png";
+
+    // toggle views
+    mainView.classList.toggle("hidden", settingsOpen);
+    settingsView.classList.toggle("hidden", !settingsOpen);
+});
+
 function renderLive(match) {
     const section = document.getElementById("liveMatchSection");
 
@@ -94,6 +115,44 @@ function renderUpcoming(match, minutes) {
         </div>
         <div class="next-match-time">${formatCountdown(minutes)}</div>
     `;
+}
+
+// toggle settings panel
+document.getElementById("settingsToggle").addEventListener("click", () => {
+    const gear = document.getElementById("settingsToggle");
+    const panel = document.getElementById("settingsPanel");
+
+    gear.classList.toggle("rotate");
+    panel.classList.toggle("hidden");
+});
+
+// Load and apply settings
+function loadSettings() {
+    chrome.storage.local.get(["showBadge", "darkMode"], (result) => {
+        // badge toggle - show/hidden
+        const badgeToggle = document.getElementById("badgeToggle");
+        badgeToggle.checked = result.showBadge ?? true;
+        badgeToggle.addEventListener("change", () => {
+            const show = badgeToggle.checked;
+            chrome.storage.local.set({ showBadge: show });
+
+            if (!show) {
+                chrome.action.setBadgeText({ text: "" });
+            }
+        });
+
+        // Dark mode toggle
+        const darkToggle = document.getElementById("darkModeToggle");
+        darkToggle.checked = result.darkMode ?? true;
+        if (!darkToggle.checked) document.body.classList.add("light-mode");
+
+        darkToggle.addEventListener("change", () => {
+            const isDark = darkToggle.checked;
+            chrome.storage.local.set({ darkMode: isDark });
+
+            document.body.classList.toggle("light-mode", !isDark);
+        });
+    });
 }
 
 function loadData() {
