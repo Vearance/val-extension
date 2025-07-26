@@ -110,12 +110,18 @@ async function checkLiveMatches() {
         chrome.storage.local.set({ liveMatches: matches });
 
         // show badge
-        const liveCount = matches.length;
-        chrome.action.setBadgeText({ text: liveCount > 0 ? String(liveCount) : "" });
-        chrome.action.setBadgeBackgroundColor({ color: "#434343" });
-        chrome.action.setBadgeTextColor?.({ color: "#FFFFFF" });
+        chrome.storage.local.get("showBadge", (result) => {
+            if (result.showBadge ?? true) {  // default true
+                const liveCount = matches.length;
+                chrome.action.setBadgeText({ text: liveCount > 0 ? String(liveCount) : "" });
+                chrome.action.setBadgeBackgroundColor({ color: "#434343" });
+            } else {
+                // if setting is false, ensure badge is cleared
+                chrome.action.setBadgeText({ text: "" });
+            }
+        });
 
-        if (liveCount === 0) {
+        if (matches.length === 0) {
             console.log("No live matches. Back to upcoming matches.");
             chrome.alarms.clear("checkLive");
             checkUpcomingMatches(); // back to schedule

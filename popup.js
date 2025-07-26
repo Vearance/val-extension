@@ -22,22 +22,27 @@ const settingsView = document.getElementById("settingsView");
 
 let isSettingsOpen = false;
 
+function updateSettingsIcon() {
+    const isLightMode = document.body.classList.contains('light-mode');
+    
+    if (isSettingsOpen) {
+        settingsBtn.src = isLightMode ? "images/close-dark.png" : "images/close-light.png";
+    } else {
+        settingsBtn.src = isLightMode ? "images/setting-dark.png" : "images/setting-light.png";
+    }
+}
+
 settingsBtn.addEventListener("click", () => {
-    // Flip the state
+    // flip the state
     isSettingsOpen = !isSettingsOpen;
 
     settingsBtn.classList.toggle("rotate", isSettingsOpen);
 
-    // Toggle which view is hidden
+    // toggle which view is hidden
     mainView.classList.toggle("hidden", isSettingsOpen);
     settingsView.classList.toggle("hidden", !isSettingsOpen);
 
-    // Change the icon image based on the state
-    if (isSettingsOpen) {
-        settingsBtn.src = "images/close-light.png";
-    } else {
-        settingsBtn.src = "images/setting-light.png";
-    }
+    updateSettingsIcon();
 });
 
 function renderLive(match) {
@@ -120,40 +125,41 @@ function renderUpcoming(match, minutes) {
     `;
 }
 
-// // toggle settings panel
-// document.getElementById("settingsToggle").addEventListener("click", () => {
-//     const gear = document.getElementById("settingsToggle");
-//     const panel = document.getElementById("settingsPanel");
-
-//     gear.classList.toggle("rotate");
-//     panel.classList.toggle("hidden");
-// });
-
 // Load and apply settings
 function loadSettings() {
     chrome.storage.local.get(["showBadge", "darkMode"], (result) => {
         // badge toggle - show/hidden
         const badgeToggle = document.getElementById("badgeToggle");
         badgeToggle.checked = result.showBadge ?? true;
+
         badgeToggle.addEventListener("change", () => {
             const show = badgeToggle.checked;
             chrome.storage.local.set({ showBadge: show });
 
-            if (!show) {
+            if (show) {
+                chrome.storage.local.get("liveMatches", ({ liveMatches }) => {
+                    const liveCount = liveMatches?.length || 0;
+                    chrome.action.setBadgeText({ text: liveCount > 0 ? String(liveCount) : "" });
+                });
+            } else {
                 chrome.action.setBadgeText({ text: "" });
             }
         });
 
-        // Dark mode toggle
+        // dark mode toggle
         const darkToggle = document.getElementById("darkModeToggle");
         darkToggle.checked = result.darkMode ?? true;
         if (!darkToggle.checked) document.body.classList.add("light-mode");
+        
+        updateSettingsIcon();
 
         darkToggle.addEventListener("change", () => {
             const isDark = darkToggle.checked;
             chrome.storage.local.set({ darkMode: isDark });
 
             document.body.classList.toggle("light-mode", !isDark);
+
+            updateSettingsIcon();
         });
     });
 }

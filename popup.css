@@ -128,7 +128,7 @@ body {
 }
 
 .settings-panel {
-    padding: 0px 16px 4px;
+    padding: 0px 16px 12px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -140,7 +140,7 @@ body {
 
 /* --- Divider Style --- */
 .divider {
-    height: 1px;
+    height: 0.5px;
     background-color: rgba(161, 161, 161, 0.70);
 }
 
@@ -201,19 +201,19 @@ body {
 
 /* Light mode */
 body.light-mode {
-    background-color: #f6f6f6;
-    color: #111;
+    background-color: #DCDCDC;
+    color: #0E1923;
 }
 
 body.light-mode .scoreboard-container {
-    background: #ffffff;
+    background: #DCDCDC;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .scoreboard-header,
 body.light-mode .settings-header,
 body.light-mode .next-match-section {
-    border-color: #e0e0e0;
+    border-color: #A1A1A1;
 }
 
 body.light-mode .settings-panel {
@@ -227,7 +227,7 @@ body.light-mode .map-score-info .score-separator,
 body.light-mode .map-score-info .score-right,
 body.light-mode .map-score-info .map,
 body.light-mode .series-score-value {
-    color: #111;
+    color: #0E1923;
 }
 
 body.light-mode .no-match-msg,
@@ -237,25 +237,33 @@ body.light-mode .next-match-info p,
 body.light-mode .settings-panel,
 body.light-mode .live-match-header .match-info .match-series,
 body.light-mode .next-match-time {
-    color: #555;
+    color: #232323;
 }
 
 body.light-mode .team-card,
 body.light-mode .series-score-value {
-    background-color: #f0f0f0;
+    background-color: #E7E7E7;
 }
 
 body.light-mode #settingsView {
-    background-color: #ffffff;
+    background-color: #DCDCDC;
 }
 
-body.light-mode .settings-icon {
-    /* Assuming you have a dark version of the icon */
+/* body.light-mode .settings-icon {
     content: url('images/setting-dark.png');
 }
 
 body.light-mode .settings-icon.close {
     content: url('images/close-dark.png');
+} */
+
+body.light-mode #mainView .scoreboard-header,
+body.light-mode .next-match-section {
+    border-color: #0E1923;
+}
+
+body.light-mode .divider {
+    background-color: #0E1923;
 }
 
 /* Live Match Section */
@@ -279,6 +287,10 @@ body.light-mode .settings-icon.close {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+body.light-mode .live-match-header .match-info h2 {
+    color: #111; /* Or any dark color you prefer */
 }
 
 .live-match-header .match-info .match-event {
@@ -480,7 +492,7 @@ body.light-mode .settings-icon.close {
 
 .about-section {
     border-top: 1px solid rgba(161, 161, 161, 0.70);
-    padding-top: 16px;
+    padding-top: 12px;
     margin-top: 6px;
     display: flex;
     justify-content: space-between;
