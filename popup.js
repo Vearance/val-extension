@@ -16,25 +16,28 @@ function sum(val1, val2) {
     return (val1 === "N/A" ? 0 : parseInt(val1)) + (val2 === "N/A" ? 0 : parseInt(val2));
 }
 
-const toggleBtn = document.getElementById("settingsToggle");
+const settingsBtn = document.getElementById("settingsToggle");
 const mainView = document.getElementById("mainView");
 const settingsView = document.getElementById("settingsView");
 
-let settingsOpen = false;
+let isSettingsOpen = false;
 
-toggleBtn.addEventListener("click", () => {
-    settingsOpen = !settingsOpen;
+settingsBtn.addEventListener("click", () => {
+    // Flip the state
+    isSettingsOpen = !isSettingsOpen;
 
-    // toggle rotate icon
-    toggleBtn.classList.toggle("rotate", settingsOpen);
-    toggleBtn.classList.toggle("close", settingsOpen);
+    settingsBtn.classList.toggle("rotate", isSettingsOpen);
 
-    // change icon src
-    toggleBtn.src = settingsOpen ? "images/close-light.png" : "images/setting-light.png";
+    // Toggle which view is hidden
+    mainView.classList.toggle("hidden", isSettingsOpen);
+    settingsView.classList.toggle("hidden", !isSettingsOpen);
 
-    // toggle views
-    mainView.classList.toggle("hidden", settingsOpen);
-    settingsView.classList.toggle("hidden", !settingsOpen);
+    // Change the icon image based on the state
+    if (isSettingsOpen) {
+        settingsBtn.src = "images/close-light.png";
+    } else {
+        settingsBtn.src = "images/setting-light.png";
+    }
 });
 
 function renderLive(match) {
@@ -117,14 +120,14 @@ function renderUpcoming(match, minutes) {
     `;
 }
 
-// toggle settings panel
-document.getElementById("settingsToggle").addEventListener("click", () => {
-    const gear = document.getElementById("settingsToggle");
-    const panel = document.getElementById("settingsPanel");
+// // toggle settings panel
+// document.getElementById("settingsToggle").addEventListener("click", () => {
+//     const gear = document.getElementById("settingsToggle");
+//     const panel = document.getElementById("settingsPanel");
 
-    gear.classList.toggle("rotate");
-    panel.classList.toggle("hidden");
-});
+//     gear.classList.toggle("rotate");
+//     panel.classList.toggle("hidden");
+// });
 
 // Load and apply settings
 function loadSettings() {
@@ -163,3 +166,4 @@ function loadData() {
 }
 
 loadData();
+loadSettings();
