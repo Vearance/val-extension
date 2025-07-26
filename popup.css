@@ -10,17 +10,33 @@ body {
     color: #f0f0f0;
 }
 
-#mainView,
-#settingsView {
+#mainView{
     transition: opacity 0.3s ease;
 }
 
-#mainView.hidden,
-#settingsView.hidden {
+#mainView.hidden{
     display: none;
     opacity: 0;
+    pointer-events: none;
 }
 
+#settingsView {
+    position: absolute; /* Takes the view out of the normal flow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #282828; /* Give it a solid background */
+    z-index: 10; /* Ensure it's on top */
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#settingsView.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
 
 /* Main Scoreboard Container */
 .scoreboard-container {
@@ -32,6 +48,7 @@ body {
     padding: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* Header Section */
@@ -70,7 +87,39 @@ body {
 }
 
 /* Settings Panel */
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 16px 8px 16px;
+    border-bottom: 1px solid rgba(161, 161, 161, 0.70);
+}
+
+.settings-header .title {
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #F6F6F6;
+}
+
+.settings-header .icon {
+    width: 20px;
+    height: 20px;
+}
+
 .settings-panel {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Increased gap for better spacing */
+    font-size: 13px;
+    color: #dcdcdc;
+}
+
+/* .settings-panel {
     border-top: 1px solid #444;
     padding: 10px 16px;
     display: flex;
@@ -78,7 +127,7 @@ body {
     gap: 10px;
     font-size: 13px;
     color: #dcdcdc;
-}
+} */
 
 .settings-panel.hidden {
     display: none;
@@ -150,18 +199,63 @@ body {
     cursor: pointer;
 }
 
-/* Light mode (optional support) */
+/* Light mode */
 body.light-mode {
     background-color: #f6f6f6;
     color: #111;
 }
 
 body.light-mode .scoreboard-container {
-    background: #fff;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .scoreboard-header,
+body.light-mode .settings-header,
+body.light-mode .next-match-section {
+    border-color: #e0e0e0;
 }
 
 body.light-mode .settings-panel {
     border-color: #ccc;
+}
+
+body.light-mode .title,
+body.light-mode .next-match-info h3,
+body.light-mode .map-score-info .score-left,
+body.light-mode .map-score-info .score-separator,
+body.light-mode .map-score-info .score-right,
+body.light-mode .map-score-info .map,
+body.light-mode .series-score-value {
+    color: #111;
+}
+
+body.light-mode .no-match-msg,
+body.light-mode .live-match-header .match-info .match-event,
+body.light-mode .live-match-header .open-link,
+body.light-mode .next-match-info p,
+body.light-mode .settings-panel,
+body.light-mode .live-match-header .match-info .match-series,
+body.light-mode .next-match-time {
+    color: #555;
+}
+
+body.light-mode .team-card,
+body.light-mode .series-score-value {
+    background-color: #f0f0f0;
+}
+
+body.light-mode #settingsView {
+    background-color: #ffffff;
+}
+
+body.light-mode .settings-icon {
+    /* Assuming you have a dark version of the icon */
+    content: url('images/setting-dark.png');
+}
+
+body.light-mode .settings-icon.close {
+    content: url('images/close-dark.png');
 }
 
 /* Live Match Section */
@@ -392,4 +486,37 @@ body.light-mode .settings-panel {
     font-style: italic;
     font-weight: 400;
     line-height: normal;
+}
+
+
+.about-section {
+    border-top: 1px solid rgba(161, 161, 161, 0.70);
+    padding-top: 16px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #a1a1a1;
+}
+
+.about-section a {
+    display: inline-flex;
+    align-items: center;
+}
+
+.bmac-icon {
+    height: 24px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.bmac-icon:hover {
+    opacity: 1;
+}
+
+body.light-mode .about-section {
+    border-color: #e0e0e0;
+    color: #777;
 }
