@@ -529,6 +529,9 @@ body.light-mode .about-section {
 
 #reloadButton {
     margin-right: 28px;
+    width: 16px;
+    height: 16px;
+    margin-bottom: 1px;
 }
 
 @keyframes spin {

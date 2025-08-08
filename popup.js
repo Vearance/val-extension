@@ -30,6 +30,8 @@ function updateSettingsIcon() {
     } else {
         settingsBtn.src = isLightMode ? "images/setting-dark.png" : "images/setting-light.png";
     }
+
+    reloadBtn.src = isLightMode ? "images/reload-dark.png" : "images/reload-light.png";
 }
 
 settingsBtn.addEventListener("click", () => {
