@@ -6,27 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VCT Live Scores</title>
     <link href="popup.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@700&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body>
     <div class="scoreboard-container">
-
-        <img src="images/setting-light.png" alt="Settings" class="icon settings-icon" id="settingsToggle" width="18" height="18" />
+        <img src="images/setting-light.png" alt="Settings" class="icon settings-icon" id="settingsToggle" width="18"
+            height="18" />
 
         <div id="mainView">
-        <!-- Header -->
-        <header class="scoreboard-header">
-            <div class="title">
-                <img src="images/icon.png" width="20" height="20" />
-                VCT Live Scores
-            </div>
-            
-        </header>
+            <!-- Header -->
+            <header class="scoreboard-header">
+                <div class="title">
+                    <img src="images/icon.png" width="20" height="20" />
+                    VCT Live Scores
+                </div>
+                <img src="images/reload.png" alt="Reload" id="reloadButton" class="icon reload-icon" width="10" height="10" title="Reload" />
+            </header>
 
-        <!-- MAIN VIEW -->
-        <!-- <div id="mainView"> -->
+            <!-- MAIN VIEW -->
+            <!-- <div id="mainView"> -->
             <!-- Live Match -->
             <section class="live-match-section" id="liveMatchSection">
                 <!-- Dynamic content will be injected by popup.js -->
@@ -36,7 +37,7 @@
             <section class="next-match-section" id="nextMatchSection">
                 <!-- Dynamic content will be injected by popup.js -->
             </section>
-        <!-- </div> -->
+            <!-- </div> -->
         </div>
 
         <!-- SETTINGS VIEW -->
@@ -46,7 +47,6 @@
                     <img src="images/icon.png" width="20" height="20" />
                     Settings
                 </div>
-                
             </header>
             <!-- Settings Panel -->
             <div class="settings-panel">
@@ -70,10 +70,12 @@
 
                 <div class="about-section">
                     <span>Made by Veacodes © 2025</span>
+                    <!-- <a href="https://www.buymeacoffee.com/yourusername" target="_blank" title="Support the developer!">
+                        <img src="images/bmc-logo.svg" alt="Buy Me A Coffee" class="bmac-icon" />
+                    </a> -->
                 </div>
             </div>
         </div>
-
     </div>
 
     <script src="popup.js"></script>

@@ -522,3 +522,20 @@ body.light-mode .about-section {
     border-color: #e0e0e0;
     color: #777;
 }
+
+.reload-icon.rotate {
+    animation: spin 1s linear;
+}
+
+#reloadButton {
+    margin-right: 28px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -171,5 +171,28 @@ function loadData() {
     });
 }
 
+const reloadBtn = document.getElementById("reloadButton");
+
+reloadBtn.addEventListener("click", () => {
+    reloadBtn.classList.add("rotate"); 
+    
+    chrome.runtime.sendMessage({ action: "reloadData" }, (response) => {
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError.message);
+            reloadBtn.classList.remove("rotate");
+        } else if (response && response.status === "completed") {
+            loadData();
+
+            setTimeout(() => {
+                reloadBtn.classList.remove("rotate");
+            }, 500); // 500ms: rotation animation time
+        } else {
+            console.error("Failed to reload data:", response?.message);
+            reloadBtn.classList.remove("rotate");
+        }
+    });
+});
+
+
 loadData();
 loadSettings();
