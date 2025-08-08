@@ -22,6 +22,25 @@ chrome.runtime.onInstalled.addListener(() => {
     checkLiveMatches();
 });
 
+// reload
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "reloadData") {
+        console.log("Reloading data request...");
+
+        Promise.all([
+            checkUpcomingMatches(),
+            checkLiveMatches()
+        ]).then(() => {
+            sendResponse({ status: "completed" });
+        }).catch(err => {
+            console.error("Error reloading data:", err);
+            sendResponse({ status: "error", message: err.message });
+        });
+
+        return true; // keep sendResponse async
+    }
+});
+
 // UPCOMING MATCHES LOGIC
 
 function setCooldown(minutes) {
@@ -64,10 +83,10 @@ async function checkUpcomingMatches() {
         // cooldown based on time difference
         if (diffMin > 720) setCooldown(660);  // >12h
         else if (diffMin > 360) setCooldown(300);  // 6–12h
-        else if (diffMin > 60) setCooldown(60);  // 1–6h
+        else if (diffMin > 60) setCooldown(50);  // 1–6h
         else if (diffMin > 30) setCooldown(10);  // 30–60min
         else if (diffMin > 5) setCooldown(2);  // 5–30min
-        else if (diffMin > 0.5) setCooldown(0.5);  // 30s–5min
+        else if (diffMin > 1) setCooldown(0.5);  // 1–5min, check every 30s
         else {
             // Match should have started or already passed
             console.log("Match may be live now. Switch to live polling soon.");
@@ -118,6 +137,7 @@ async function checkLiveMatches() {
             } else {
                 // if setting is false, ensure badge is cleared
                 chrome.action.setBadgeText({ text: "" });
+                const liveCount = 0;
             }
         });
 
@@ -126,7 +146,7 @@ async function checkLiveMatches() {
             chrome.alarms.clear("checkLive");
             checkUpcomingMatches(); // back to schedule
         } else {
-            console.log(`Live match(es): ${liveCount}`);
+            console.log(`Live match(es): ${matches.length}`);
 
             chrome.alarms.get("checkLive", alarm => {
                 if (!alarm) {
