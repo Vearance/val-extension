@@ -1,6 +1,6 @@
 # VCT Live Scores Browser Extension
 
-Basically tells you when is the next VCT match is. Also tells you the live score of ongoing VCT matches is available.
+Basically tells you when is the next VCT match is. Also tells you the live score of ongoing VCT matches if it's available.
 
 Chrome version:
 `https://chromewebstore.google.com/detail/okbakaehodmkheollelbkligkploblae`
